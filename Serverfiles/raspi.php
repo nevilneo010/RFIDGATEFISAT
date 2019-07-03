@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Whatever you want</title>
+    <title>SPARC</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
