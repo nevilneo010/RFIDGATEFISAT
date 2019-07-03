@@ -15,6 +15,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
+
 $sql = "SELECT Name.Name,rfid.Date1,rfid.IO FROM `rfid` INNER JOIN name ON rfid.RFID=name.RFID WHERE id=(SELECT MAX(id) FROM rfid);";
 if ($result = $conn->query($sql)) {
     while ($row = $result->fetch_assoc()) {
