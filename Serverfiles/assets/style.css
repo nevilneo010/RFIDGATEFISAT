@@ -1,0 +1,40 @@
+@font-face {
+    font-family: Raleway;
+    src: url(Raleway-Regular.ttf);
+}
+
+body {
+    background-color: #ffff77;
+    font-family: 'Raleway', sans-serif;
+}
+
+.top-row {
+    height: 70vh;
+    width: 100%;
+    text-align: center;
+}
+
+.text-section {
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+}
+
+.bottom-row {
+    height: 30vh;
+}
+
+.image-section {
+    margin: 0;
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -15%);
+}
+
+img {
+    max-height: 150px;
+}
