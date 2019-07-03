@@ -29,13 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "New record created successfully";
         } 
         else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echdo "Error: " . $sql . "<br>" . $conn->error;
         }
     
         $conn->close();
     }
     else {
-        echo "Wrong API Key provided.";
+        echo "Wrong APIi Key provided.";
     }
 
 }
