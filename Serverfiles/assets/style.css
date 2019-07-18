@@ -6,6 +6,8 @@
 body {
     background-color: #ffff77;
     font-family: 'Raleway', sans-serif;
+    font-size: 28px;
+
 }
 
 .top-row {
@@ -30,7 +32,7 @@ body {
 .image-section {
     margin: 0;
     position: absolute;
-    top: 85%;
+    top: 75%;
     left: 50%;
     transform: translate(-50%, -15%);
 }
@@ -38,3 +40,4 @@ body {
 img {
     max-height: 150px;
 }
+

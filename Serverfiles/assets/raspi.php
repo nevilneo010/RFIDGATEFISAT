@@ -26,12 +26,16 @@ if ($result = $conn->query($sql)) {
         if($io=="IN"){
             echo ' 
                 <h1> Welcome back ' .$row_Name . '</h1> 
-                <h1> ' . $row_value3 . '</h1>';
+                <h1> ' . substr($row_value3,11). '</h1>
+                <p style="font-size: 100px;color:green;">IN</p>';
+
         }
         else{
             echo ' 
                 <h1> See you soon ' .$text.$row_Name . '</h1> 
-                <h1> ' . $row_value3 . '</h1> ';
+                <h1> ' . $row_value3 . '</h1> 
+                <p style="font-size: 100px;color:RED;">OUT</p>;';
+
         }
     }
     $result->free(); 
