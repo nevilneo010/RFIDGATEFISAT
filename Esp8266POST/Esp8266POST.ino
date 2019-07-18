@@ -12,15 +12,22 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
+//RFID SETTINGS
 #define RST_PIN         5          // Configurable, see typical pin layout above
 #define SS_PIN          4        // Configurable, see typical pin layout above
 MFRC522 mfrc522(SS_PIN, RST_PIN); 
-/* Set these to your desired credentials. */
-const char *ssid = "abcdef";  //ENTER YOUR WIFI SETTINGS
-const char *password = "12341234";
 String user;
-//Web/Server address to read/write from 
-const char *host = "172.16.26.15";   //https://circuits4you.com website or IP address of server
+
+//WIFI SETTINGS
+const char *ssid = "GATESECURITY";  //ENTER YOUR WIFI SETTINGS
+const char *password = "sec@F!s@t";//"sec@F!s@t";
+IPAddress staticIP(172, 16, 31, 41); //ESP static ip
+IPAddress gateway(172, 16, 1, 254);   //IP Address of your WiFi Router (Gateway)
+IPAddress subnet(255, 255, 0, 0);  //Subnet mask
+IPAddress dns(172, 16, 10, 10);  //DNS
+const char* deviceName = "Test@RFID";
+
+const char *host = "172.16.26.15";   //Server IP
 
 //=======================================================================
 //                    Power on setup
@@ -29,15 +36,20 @@ const char *host = "172.16.26.15";   //https://circuits4you.com website or IP ad
 void setup() {
   delay(1000);
   Serial.begin(115200);
-    pinMode(16, INPUT_PULLUP);
+  pinMode(0, INPUT);
+  pinMode(2, INPUT);
+  pinMode(15, OUTPUT);
 
   WiFi.mode(WIFI_OFF);        //Prevents reconnection issue (taking too long to connect)
+  WiFi.begin(ssid, password);
+  //WiFi.disconnect();  //Prevent connecting to wifi based on previous configuration
   delay(1000);
-  WiFi.mode(WIFI_STA);        //This line hides the viewing of ESP as wifi hotspot
-  
-  WiFi.begin(ssid, password);     //Connect to your WiFi router
+  WiFi.hostname(deviceName);      // DHCP Hostname (useful for finding device for static lease)
+  WiFi.config(staticIP, subnet, gateway, dns);
   Serial.println("");
+   delay(1000);
 
+  
   Serial.print("Connecting");
   // Wait for connection
   while (WiFi.status() != WL_CONNECTED) {
@@ -51,16 +63,19 @@ void setup() {
   Serial.println(ssid);
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());  //IP address assigned to your ESP
-    SPI.begin();                                                  // Init SPI bus
+  SPI.begin();                                                  // Init SPI bus
   mfrc522.PCD_Init(); 
+  WiFi.config(staticIP, subnet, gateway, dns);delay(1000);
+  Serial.println(WiFi.localIP()); 
 }
 
 //=======================================================================
 //                    Main Program Loop
 //=======================================================================
 void loop() {
-  delay(200);
-   MFRC522::MIFARE_Key key;
+ // Serial.println(digitalRead(0));Serial.println(digitalRead(2));
+  digitalWrite(15,LOW);
+  MFRC522::MIFARE_Key key;
   for (byte i = 0; i < 6; i++) key.keyByte[i] = 0xFF;
 
   //some variables we need
@@ -89,10 +104,27 @@ void loop() {
   user.toUpperCase();
   Serial.println(user);
   String io;
-    if(digitalRead(16))
-         io = "IN";
-    else
-         io = "OUT";
+  int flag=0;
+  digitalWrite(15,HIGH);
+  delay(600);
+  digitalWrite(15,LOW);
+  while(flag==0){
+    if(digitalRead(0)==LOW){
+       io = "OUT";
+       flag=1;
+       digitalWrite(15,HIGH);
+       delay(200);
+       digitalWrite(15,LOW);
+      }
+    else if(digitalRead(2)==LOW){
+      io = "IN";
+      flag=1;
+       digitalWrite(15,HIGH);
+       delay(200);
+       digitalWrite(15,LOW);
+      }
+      delay(10);
+    }
 
   //Post Data
 String  postData = "api_key=tPmAT5Ab3j7F9&name="+user+"&IO="+io;
