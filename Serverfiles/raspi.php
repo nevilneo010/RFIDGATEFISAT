@@ -14,8 +14,14 @@
         </div>
     </div>
     <div class="row bottom-row">
-        <div class="image-section">
+        <div class="image-section" >
             <img src="assets/logos/Fab_Lab_logo.png">
+        </div>
+        <div class="image-section1" >
+            <img src="assets/logos/gxtron.png">
+        </div>
+        <div class="image-section2" >
+            <img src="assets/logos/sparc.png">
         </div>
     </div>
 </body>

@@ -33,11 +33,34 @@ body {
     margin: 0;
     position: absolute;
     top: 75%;
-    left: 50%;
+    left: 71%;
     transform: translate(-50%, -15%);
+    width: 50%;
+}
+.image-section1 {
+    margin: 0;
+    position: absolute;
+    top: 77%;
+    left: 90%;
+    transform: translate(-50%, -15%);
+    width: 50%;
+}
+.image-section2 {
+    margin: 0;
+    position: absolute;
+    top: 77%;
+    left: 45%;
+    transform: translate(-50%, -15%);
+    width: 50%;
 }
 
 img {
     max-height: 150px;
 }
 
+p{
+    font-family: 'Raleway', sans-serif;
+    font-size: 100px;
+    color:Red;
+
+}
