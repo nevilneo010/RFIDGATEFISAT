@@ -27,7 +27,7 @@ IPAddress subnet(255, 255, 0, 0);  //Subnet mask
 IPAddress dns(172, 16, 10, 10);  //DNS
 const char* deviceName = "Test@RFID";
 
-const char *host = "172.16.26.15";   //Server IP
+const char *host = "172.16.26.46";   //Server IP
 
 //=======================================================================
 //                    Power on setup
@@ -128,7 +128,7 @@ void loop() {
 
   //Post Data
 String  postData = "api_key=tPmAT5Ab3j7F9&name="+user+"&IO="+io;
-  http.begin("http://172.16.26.15/test/serverfiles/submit.php");              //Specify request destination
+  http.begin("http://172.16.26.46/submit.php");              //Specify request destination
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");    //Specify content-type header
   int httpCode = http.POST(postData);   //Send the request
   String payload = http.getString();    //Get the response payload
